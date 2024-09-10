@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './components/Auth/Login';
+import Register from './components/Auth/Register';
+import Dashboard from './components/Dashboard';
+import QuizStart from './components/Quiz/QuizStart';
+import QuizQuestion from './components/Quiz/QuizQuestion';
+import QuizResult from './components/Quiz/QuizResult';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/quiz/start" component={QuizStart} />
+          <Route path="/quiz/question" component={QuizQuestion} />
+          <Route path="/quiz/result" component={QuizResult} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 
